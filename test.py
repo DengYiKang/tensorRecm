@@ -1,4 +1,2 @@
-import re
-
-str="a b c "
-print(str.split(' '))
+maxn=0x7fffffff
+print(maxn)
