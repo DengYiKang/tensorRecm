@@ -285,13 +285,13 @@ def select_tuple_by_tuple(by_file, selected_file, file_out):
         line = f1.readline()
         if not line:
             break
-        tag_id = str(line.strip().split('\n')[0])
+        tag_id = str(line.strip().split('\t')[0])
         visite.add(tag_id)
     while True:
         line = f2.readline()
         if not line:
             break
-        tag_id = str(line.strip().split('\n')[0])
+        tag_id = str(line.strip().split('\t')[0])
         if tag_id in visite:
             f3.write(line)
     f3.close()
@@ -311,7 +311,7 @@ def map_triple(triple_in, triple_out, tag_map_out):
     """
     map_u = dict()
     map_i = dict()
-    set_t = set()
+    map_t = dict()
     cnt_u = 1
     cnt_i = 1
     cnt_t = 1
@@ -338,10 +338,13 @@ def map_triple(triple_in, triple_out, tag_map_out):
             cnt_i += 1
         else:
             item = str(map_i[item])
-        if tag not in set_t:
-            set_t.add(tag)
+        if tag not in map_t:
+            map_t[tag] = cnt_t
             f3.write(tag + '\t' + str(cnt_t) + '\n')
+            tag = str(cnt_t)
             cnt_t += 1
+        else:
+            tag = str(map_t[tag])
         f2.write(user + '\t' + item + '\t' + tag + '\n')
     f3.close()
     f2.close()
@@ -470,6 +473,26 @@ def find_min(d):
     for k in d:
         min_num = min(min_num, d[k])
     return min_num
+
+
+def sort_tuple(file_in, file_out, which):
+    f1 = open(file_in)
+    f2 = open(file_out, 'w')
+    mp = dict()
+    while True:
+        line = f1.readline()
+        if not line:
+            break
+        cap = line.strip().split('\t')
+        if which == 0:
+            mp[int(cap[0])] = str(cap[1])
+        else:
+            mp[str(cap[0])] = int(cap[1])
+    sorted_mp = sorted(mp.items(), key=operator.itemgetter(which))
+    for x, y in sorted_mp:
+        f2.write(str(x) + '\t' + str(y) + '\n')
+    f2.close()
+    f1.close()
 
 # def test():
 #     init()
