@@ -302,7 +302,7 @@ def select_tuple_by_tuple(by_file, selected_file, file_out):
 
 def map_triple(triple_in, triple_out, tag_map_out):
     """
-    map the triple, directly map the user,item in triple_out, but stores tag_map in tag_map_out, also update len.txt
+    map the triple, directly map the user,item, tag in triple_out, and stores tag_map in tag_map_out, also update len.txt
     the format of tag_map_out: old_id+'\t'+new_id+'\n'
     :param triple_in:
     :param triple_out:
@@ -388,34 +388,38 @@ def map_tag(tag_map_in, tuple_in, tuple_out):
     print(tuple_out + ' has generated')
 
 
-def final_triple(tag_map_in, triple_in, triple_out):
+def map_triple_by_tuple(tuple_map_in, triple_in, triple_out, which):
     """
     generate the final triples
-    :param tag_map_in:
+    :param tag_map_in: old-new
     :param triple_in: u-i-t
     :param triple_out:
+    :param which:
     :return:
     """
-    f1 = open(tag_map_in)
+    f1 = open(tuple_map_in)
     f2 = open(triple_in)
     f3 = open(triple_out, 'w')
-    tag_map = dict()
+    mp = dict()
     while True:
         line = f1.readline()
         if not line:
             break
+        print(line)
         cap = line.strip().split('\t')
-        tag_map[str(cap[0])] = str(cap[1])
+        mp[str(cap[0])] = str(cap[1])
     while True:
         line = f2.readline()
         if not line:
             break
         cap = line.strip().split('\t')
-        user = str(cap[0])
-        item = str(cap[1])
-        old_tag = str(cap[2])
-        new_tag = tag_map[old_tag]
-        f3.write(user + '\t' + item + '\t' + new_tag + '\n')
+        # user = str(cap[0])
+        # item = str(cap[1])
+        # old_tag = str(cap[2])
+        terms = [str(cap[0]), str(cap[1]), str(cap[2])]
+        # new_tag = mp[old_tag]
+        terms[which] = mp[terms[which]]
+        f3.write(terms[0] + '\t' + terms[1] + '\t' + terms[2] + '\n')
     f3.close()
     f2.close()
     f1.close()
@@ -433,12 +437,14 @@ def statistic(triple_in, file_out):
     dict_u = dict()
     dict_i = dict()
     dict_t = dict()
+    tot_cnt = 0
     f1 = open(triple_in)
     f2 = open(file_out, 'w')
     while True:
         line = f1.readline()
         if not line:
             break
+        tot_cnt += 1
         cap = line.strip().split('\t')
         user = str(cap[0])
         item = str(cap[1])
@@ -459,7 +465,8 @@ def statistic(triple_in, file_out):
     min_i = find_min(dict_i)
     min_t = find_min(dict_t)
     f2.write('statistics:\n')
-    f2.write(str(get_len(0)) + 'users, ' + str(get_len(1)) + 'items, ' + str(get_len(2)) + 'tags\n')
+    f2.write(str(get_len(0)) + ' users, ' + str(get_len(1)) + ' items, ' + str(get_len(2)) + ' tags, ' + str(
+        tot_cnt) + ' triples\n')
     f2.write('the minimum frequency of users: ' + str(min_u) + '\n')
     f2.write('the minimum frequency of items: ' + str(min_i) + '\n')
     f2.write('the minimum frequency of tags: ' + str(min_t) + '\n')

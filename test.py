@@ -38,3 +38,4 @@ subsetGen.select_tuple_by_tuple(STORED_PATH + 't_f_3.dat', TAG_VALUE_PATH, STORE
 subsetGen.map_triple(STORED_PATH + 'u_i_t_3.dat', STORED_PATH + 'u_i_t_fin.dat', STORED_PATH + 'tag_map.dat')
 subsetGen.map_tag(STORED_PATH + 'tag_map.dat', STORED_PATH + 't_v.dat', STORED_PATH + 't_v_2.dat')
 subsetGen.sort_tuple(STORED_PATH+'t_v_2.dat', STORED_PATH+'t_v_fin.dat', 0)
+subsetGen.statistic(STORED_PATH+'u_i_t_fin.dat', STORED_PATH+'statistic.dat')
