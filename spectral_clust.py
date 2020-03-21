@@ -34,6 +34,8 @@ for i in range(0, clusers):
 f3.close()
 f2.close()
 f1.close()
-subsetGen.map_triple_by_tuple(STORED_PATH + 'clusters_map.dat', STORED_PATH + 'u_i_t_fin.dat',
-                              STORED_PATH + 'u_i_t_clustered.dat', 2)
+subsetGen.map_triple_by_tuple(STORED_PATH + 'clusters_map.dat', STORED_PATH + 'u_i_t_test.dat',
+                              STORED_PATH + 'u_i_t_test_clustered.dat', 2)
+subsetGen.map_triple_by_tuple(STORED_PATH + 'clusters_map.dat', STORED_PATH + 'u_i_t_train.dat',
+                              STORED_PATH + 'u_i_t_train_clustered.dat', 2)
 
