@@ -1,6 +1,7 @@
 from sklearn.cluster import SpectralClustering
 import subsetGen
 import dataset_split
+import tensorDecom
 
 PATH = "/home/yikang/Documents/dataset/ml-20m/"
 STORED_PATH = PATH + "subset/"
@@ -38,3 +39,4 @@ f1.close()
 subsetGen.map_triple_by_tuple(STORED_PATH + 'clusters_map.dat', STORED_PATH + 'u_i_t_fin.dat',
                               STORED_PATH + 'u_i_t_clustered.dat', 2)
 dataset_split.go(STORED_PATH + 'u_i_t_clustered.dat', STORED_PATH + 'u_i_t_test.dat', STORED_PATH + 'u_i_t_train.dat')
+tensorDecom.go(subsetGen.get_len(0), subsetGen.get_len(1), clusers)
