@@ -9,6 +9,7 @@ STORED_PATH = PATH + "subset/"
 U_LEN = subsetGen.get_len(0)
 I_LEN = subsetGen.get_len(1)
 T_LEN = 10
+TOP = 20
 x = np.zeros([U_LEN, I_LEN, T_LEN])
 with open(STORED_PATH + 'u_i_t_train.dat') as rf:
     while True:
@@ -29,9 +30,11 @@ mp_set = dict()  # user-item set
 # evaluation
 Prec = list()
 Recall = list()
-for i in range(0, T_LEN):
+F1 = list()
+for i in range(0, TOP):
     Prec.append(0.0)
     Recall.append(0.0)
+    F1.append(0.0)
 with open(STORED_PATH + 'u_i_t_test.dat') as rf:
     while True:
         line = rf.readline()
@@ -47,7 +50,7 @@ with open(STORED_PATH + 'u_i_t_test.dat') as rf:
             mp_set[user] = set()
         mp_set[user].add(item)
 
-for top in range(1, T_LEN + 1):
+for top in range(1, TOP + 1):
     for user, tag in mp_tag.items():
         u_t_list = mx[user, :, tag].tolist()
         tmp_list = list()  # [[value, index],...]
@@ -64,5 +67,5 @@ for top in range(1, T_LEN + 1):
         Recall[top - 1] += float(len(z) / len(mp_set[user]))
     Prec[top - 1] /= U_LEN
     Recall[top - 1] /= U_LEN
-print(Prec)
-print(Recall)
+    F1[top - 1] = 2 * Prec[top - 1] * Recall[top - 1] / (Prec[top - 1] + Recall[top - 1])
+print(F1)
