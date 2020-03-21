@@ -3,10 +3,10 @@ import subsetGen
 
 PATH = "/home/yikang/Documents/dataset/ml-20m/"
 STORED_PATH = PATH + "subset/"
-clusers = 7
+clusers = 10
 mp = dict()
 
-f1 = open(STORED_PATH + 'fin_sim.dat')
+f1 = open(STORED_PATH + 'cosim.dat')
 f2 = open(STORED_PATH + 'clusters_map.dat', 'w')
 f3 = open(STORED_PATH + 'clusters_statistic.dat', 'w')
 matrix = []
@@ -34,8 +34,6 @@ for i in range(0, clusers):
 f3.close()
 f2.close()
 f1.close()
-subsetGen.map_triple_by_tuple(STORED_PATH + 'clusters_map.dat', STORED_PATH + 'u_i_t_test.dat',
-                              STORED_PATH + 'u_i_t_test_clustered.dat', 2)
-subsetGen.map_triple_by_tuple(STORED_PATH + 'clusters_map.dat', STORED_PATH + 'u_i_t_train.dat',
-                              STORED_PATH + 'u_i_t_train_clustered.dat', 2)
+subsetGen.map_triple_by_tuple(STORED_PATH + 'clusters_map.dat', STORED_PATH + 'u_i_t_fin.dat',
+                              STORED_PATH + 'u_i_t_clustered.dat', 2)
 
