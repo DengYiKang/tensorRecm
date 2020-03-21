@@ -405,7 +405,7 @@ def map_triple_by_tuple(tuple_map_in, triple_in, triple_out, which):
         line = f1.readline()
         if not line:
             break
-        print(line)
+        # print(line)
         cap = line.strip().split('\t')
         mp[str(cap[0])] = str(cap[1])
     while True:
