@@ -6,7 +6,7 @@ STORED_PATH = PATH + "subset/"
 clusers = 10
 mp = dict()
 
-f1 = open(STORED_PATH + 'cosim.dat')
+f1 = open(STORED_PATH + 'fin_sim.dat')
 f2 = open(STORED_PATH + 'clusters_map.dat', 'w')
 f3 = open(STORED_PATH + 'clusters_statistic.dat', 'w')
 matrix = []
