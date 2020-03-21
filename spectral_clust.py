@@ -1,5 +1,6 @@
 from sklearn.cluster import SpectralClustering
 import subsetGen
+import dataset_split
 
 PATH = "/home/yikang/Documents/dataset/ml-20m/"
 STORED_PATH = PATH + "subset/"
@@ -24,7 +25,7 @@ cnt = 0
 for term in labels:
     cnt += 1
     f2.write(str(cnt) + '\t')
-    f2.write(str(term+1) + '\n')
+    f2.write(str(term + 1) + '\n')
 for i in labels:
     if i not in mp:
         mp[i] = 0
@@ -36,4 +37,4 @@ f2.close()
 f1.close()
 subsetGen.map_triple_by_tuple(STORED_PATH + 'clusters_map.dat', STORED_PATH + 'u_i_t_fin.dat',
                               STORED_PATH + 'u_i_t_clustered.dat', 2)
-
+dataset_split.go(STORED_PATH + 'u_i_t_clustered.dat', STORED_PATH + 'u_i_t_test.dat', STORED_PATH + 'u_i_t_train.dat')
