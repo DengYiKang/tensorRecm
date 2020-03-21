@@ -4,7 +4,7 @@ PATH = "/home/yikang/Documents/dataset/ml-20m/"
 STORED_PATH = PATH + "subset/"
 mp = dict()
 test_line = set()
-with open(STORED_PATH + 'u_i_t_fin.dat') as rf:
+with open(STORED_PATH + 'u_i_t_clustered.dat') as rf:
     lineCnt = 0
     while True:
         line = rf.readline()
@@ -14,11 +14,12 @@ with open(STORED_PATH + 'u_i_t_fin.dat') as rf:
         cap = line.strip().split('\t')
         user = int(cap[0])
         item = int(cap[1])
+        tag = int(cap[2])
         if user not in mp:
             mp[user] = dict()
-        if item not in mp[user]:
-            mp[user][item] = list()
-        mp[user][item].append(lineCnt)
+        if tag not in mp[user]:
+            mp[user][tag] = list()
+        mp[user][tag].append(lineCnt)
 for key, value in mp.items():
     index = random.randint(0, len(value) - 1)
     for v in value.values():
@@ -28,7 +29,7 @@ for key, value in mp.items():
         index -= 1
 with open(STORED_PATH + 'u_i_t_test.dat', 'w') as wf1:
     with open(STORED_PATH + 'u_i_t_train.dat', 'w') as wf2:
-        with open(STORED_PATH + 'u_i_t_fin.dat') as rf:
+        with open(STORED_PATH + 'u_i_t_clustered.dat') as rf:
             lineCnt = 0
             while True:
                 line = rf.readline()
