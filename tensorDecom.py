@@ -132,8 +132,8 @@ def go(ulen, ilen, tlen):
     Prec = list()
     Recall = list()
     F1 = list()
-    top = 20
-    for i in range(0, top):
+    TOP = 20
+    for i in range(0, TOP):
         Prec.append(0.0)
         Recall.append(0.0)
         F1.append(0.0)
@@ -141,7 +141,7 @@ def go(ulen, ilen, tlen):
     core, factors = tucker(x, [int(ulen * 0.19), int(ilen * 0.2), int(tlen)])
     mx = tucker_to_tensor((core, factors))
     mp_tag, mp_set = init_test()
-    for top in range(1, top + 1):
+    for top in range(1, TOP + 1):
         for user, tag in mp_tag.items():
             u_t_list = mx[user, :, tag].tolist()
             tmp_list = list()  # [[value, index],...]
