@@ -1,3 +1,6 @@
+from tensorly.decomposition import tucker
+from tensorly import tucker_to_tensor
+import numpy as np
 import subsetGen
 import dataset_split
 import tensorDecom
