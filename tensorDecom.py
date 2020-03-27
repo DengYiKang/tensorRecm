@@ -57,7 +57,7 @@ def init_test():
 
 
 def evaluation(mx, mp_tag, mp_set, ulen, ilen, tlen):
-    TOP = 20
+    TOP = 10
     Precision = [0.0 for _ in range(TOP)]
     Recall = [0.0 for _ in range(TOP)]
     F1 = [0.0 for _ in range(TOP)]
@@ -81,6 +81,27 @@ def evaluation(mx, mp_tag, mp_set, ulen, ilen, tlen):
         F1[top - 1] = 2 * Precision[top - 1] * Recall[top - 1] / (Precision[top - 1] + Recall[top - 1])
     print(Precision)
     print(F1)
+    with open(STORED_PATH + 'precision.dat', 'a') as wf:
+        wf.write(str(Precision[0]))
+        for i in range(TOP):
+            if i == 0:
+                continue
+            wf.write('\t' + str(Precision[i]))
+        wf.write('\n')
+    with open(STORED_PATH + 'f1.dat', 'a') as wf:
+        wf.write(str(F1[0]))
+        for i in range(TOP):
+            if i == 0:
+                continue
+            wf.write('\t' + str(F1[i]))
+        wf.write('\n')
+    with open(STORED_PATH + 'recall.dat', 'a') as wf:
+        wf.write(str(Recall[0]))
+        for i in range(TOP):
+            if i == 0:
+                continue
+            wf.write('\t' + str(Recall[i]))
+        wf.write('\n')
 
 
 def go(ulen, ilen, tlen):
