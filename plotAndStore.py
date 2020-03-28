@@ -1,14 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-PATH = "/home/yikang/Documents/dataset/ml-20m/"
+PATH = "/home/yikang/Documents/dataset/hetrec2011-lastfm-2k/"
 STORED_PATH = PATH + "subset/"
 TOP = 10
 mx = [i + 1 for i in range(TOP)]
 x = np.asarray(mx)
 y = [np.zeros([1, TOP]) for _ in range(4)]
 
-with open(STORED_PATH + 'precision.dat') as rf:
+with open(STORED_PATH + 'f1.dat') as rf:
     line_cnt = 0
     while True:
         line = rf.readline()
@@ -30,6 +30,7 @@ plt.plot(x, y[0], 'gd', label='clustHOSVD')
 plt.plot(x, y[0], 'g')
 plt.legend()
 plt.xlabel('Top')
-plt.ylabel('Precision')
-plt.title('ml-20m')
-# plt.savefig(STORED_PATH + "precision_compared.png")
+plt.ylabel('F1 Score')
+plt.title('hetrec2011-lastfm-2k')
+# plt.show()
+plt.savefig(STORED_PATH + "f1_compared.png")

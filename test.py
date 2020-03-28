@@ -15,7 +15,7 @@ import subsetGen
 # u-i-f,t-f,t-v=>t-f,t-v
 # map
 # statistic
-PATH = "/home/yikang/Documents/dataset/ml-20m/"
+PATH = "/home/yikang/Documents/dataset/hetrec2011-lastfm-2k/"
 STORED_PATH = PATH + "subset/"
 # [u-f,i-f,t-f],default [-1,-1,-1]
 LEN_FILE = "len.txt"

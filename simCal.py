@@ -2,7 +2,7 @@ from nltk.corpus import wordnet as wn
 import numpy as np
 import math
 
-PATH = "/home/yikang/Documents/dataset/ml-20m/"
+PATH = "/home/yikang/Documents/dataset/hetrec2011-lastfm-2k/"
 STORED_PATH = PATH + "subset/"
 LEN_PATH = STORED_PATH + 'len.txt'
 

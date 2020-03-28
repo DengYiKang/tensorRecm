@@ -1,7 +1,7 @@
 import re
 import subsetGen
 
-PATH = '/home/yikang/Documents/dataset/ml-20m/'
+PATH = '/home/yikang/Documents/dataset/hetrec2011-lastfm-2k/'
 STORED_PATH = PATH + 'subset/'
 pattern = re.compile(r'[^?!@#$%\^&*()\+\/\[\]\\\. ]+$')
 
@@ -20,7 +20,7 @@ def format_triple(triple_in, triple_out):
         line = f1.readline()
         if not line:
             break
-        cap = line.strip().split(',')
+        cap = line.strip().split('\t')
         try:
             user = str(cap[0])
             item = str(cap[1])
@@ -47,7 +47,7 @@ def format_tuple(tuple_in, tuple_out):
         line = f1.readline()
         if not line:
             break
-        cap = line.strip().split(',')
+        cap = line.strip().split('\t')
         try:
             x = str(cap[0])
             y = str(cap[1])
@@ -72,7 +72,7 @@ def gen_u_i_t_orgin(triple_in, tuple_in, triple_out, which):
     f2 = open(tuple_in)
     f3 = open(triple_out, 'w')
     mp = dict()
-    triple_cnt=0
+    triple_cnt = 0
     while True:
         line = f2.readline()
         if not line:
@@ -93,7 +93,7 @@ def gen_u_i_t_orgin(triple_in, tuple_in, triple_out, which):
         try:
             tmp_list[which] = mp[tmp_list[which]]
             f3.write(tmp_list[0] + '\t' + tmp_list[1] + '\t' + tmp_list[2] + '\n')
-            triple_cnt+=1
+            triple_cnt += 1
         except Exception:
             continue
     subsetGen.update_len(3, triple_cnt)
@@ -103,7 +103,8 @@ def gen_u_i_t_orgin(triple_in, tuple_in, triple_out, which):
 
 
 def go():
-    format_triple(PATH + 'tags.csv', STORED_PATH + 'user_item_tag.dat')
-    format_tuple(PATH + 'genome-tags.csv', STORED_PATH + 'tags_format.dat')
-    gen_u_i_t_orgin(STORED_PATH + 'user_item_tag.dat', STORED_PATH + 'tags_format.dat',
-                    STORED_PATH + 'user_item_tag_format.dat', 2)
+    format_triple(PATH + 'user_item_tag_utf.dat', STORED_PATH + 'user_item_tag_format.dat')
+    # format_triple(PATH + 'user_item_tag_utf.dat', STORED_PATH + 'user_item_tag.dat')
+    format_tuple(PATH + 'tags_utf8.dat', STORED_PATH + 'tags_format.dat')
+    # gen_u_i_t_orgin(STORED_PATH + 'user_item_tag.dat', STORED_PATH + 'tags_format.dat',
+    #                 STORED_PATH + 'user_item_tag_format.dat', 2)

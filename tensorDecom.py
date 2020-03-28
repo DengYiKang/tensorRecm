@@ -4,7 +4,7 @@ import numpy as np
 import subsetGen
 import operator
 
-PATH = "/home/yikang/Documents/dataset/ml-20m/"
+PATH = "/home/yikang/Documents/dataset/hetrec2011-lastfm-2k/"
 STORED_PATH = PATH + "subset/"
 
 

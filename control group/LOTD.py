@@ -5,7 +5,7 @@ import numpy as np
 
 # low order tensor decomposition
 
-PATH = "/home/yikang/Documents/dataset/ml-20m/"
+PATH = "/home/yikang/Documents/dataset/hetrec2011-lastfm-2k/"
 STORED_PATH = PATH + "subset/"
 TOP = 20
 U_LEN = subsetGen.get_len(0)

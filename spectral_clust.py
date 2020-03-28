@@ -3,9 +3,9 @@ import subsetGen
 import dataset_split
 import tensorDecom
 
-PATH = "/home/yikang/Documents/dataset/ml-20m/"
+PATH = "/home/yikang/Documents/dataset/hetrec2011-lastfm-2k/"
 STORED_PATH = PATH + "subset/"
-clusers = 10
+clusers = 9
 mp = dict()
 
 f1 = open(STORED_PATH + 'fin_sim.dat')
